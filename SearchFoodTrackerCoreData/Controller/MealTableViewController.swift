@@ -37,6 +37,7 @@ class MealTableViewController: UITableViewController, NSFetchedResultsController
         meals = fetchedResultsController.fetchedObjects ?? []
         self.tableView.reloadData()
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
@@ -77,6 +78,8 @@ class MealTableViewController: UITableViewController, NSFetchedResultsController
         cell.ratingControl.rating = Int(plistMeal.rating)
         cell.photoImageView.image = plistMeal.photo as? UIImage
     }
+    
+    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
@@ -104,50 +107,10 @@ class MealTableViewController: UITableViewController, NSFetchedResultsController
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
-    /*
-     // Override to support rearranging the table view.
-     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-     
-     }
-     */
-    
-    /*
-     // Override to support conditional rearranging of the table view.
-     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-     // Return false if you do not want the item to be re-orderable.
-     return true
-     }
-     */
-    
-    
-    // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //        super.prepare(for: segue, sender: sender)
-        //        switch (segue.identifier ?? "") {
-        //
-        //        case "add":
-        //            os_log("Adding a new meal.", log: OSLog.default, type: .debug)
-        //        case "ShowDetail":
-        //
-        //            guard let mealDetailViewController = segue.destination as? MealViewController else {
-        //                fatalError("Unexpected destination: \(segue.destination)")
-        //            }
-        //
-        //            guard let selectedMealcell = sender as? MealTableViewCell else {
-        //                fatalError("Unexpected sender: \(sender)")
-        //            }
-        //            guard let indexPath = tableView.indexPath(for: selectedMealcell) else {
-        //                fatalError("The selected cell is not being display be the table")
-        //            }
-        //
-        //            let selectedMeal = meals[indexPath.row]
-        //            mealDetailViewController.meal = selectedMeal
-        //
-        //        default:
-        //            fatalError("Unexpected Secgue Identifier ; \(segue.identifier))")
-        //        }
+       
         if let detailViewController = segue.destination as? MealViewController{
             if let index = tableView.indexPathForSelectedRow {
                 detailViewController.object = fetchedResultsController.object(at: index)
